@@ -31,15 +31,6 @@
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
 <![endif]-->
 <?php wp_head(); ?>
-<link href="<?php bloginfo('template_directory') ?>/libs/bootstrap/css/bootstrap.css" rel="stylesheet" media="all">
-<link href="<?php bloginfo('template_directory') ?>/libs/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" media="all">
-<link href="<?php bloginfo('template_directory') ?>/libs/fontawesome/css/font-awesome.css" rel="stylesheet" media="all">
-<link href="/wp-content/themes/libraries/libs/fontawesome-MITLibraries/style.css" rel="stylesheet" media="all">
-<link href="<?php bloginfo('template_directory') ?>/libs/datepicker/styles/glDatePicker.default.css" rel="stylesheet" media="all">
-<link href="<?php bloginfo('template_directory') ?>/libs/lightbox/css/lightbox.css" rel="stylesheet" media="all">
-<link href="<?php bloginfo('template_directory') ?>/css/main.css" rel="stylesheet" media="all">
-<link href="<?php bloginfo('template_directory') ?>/css/menu.css" rel="stylesheet" media="all">
-<link href="<?php bloginfo('template_directory') ?>/css/responsive.css" rel="stylesheet" media="all">
 <?php
 		//$askUrl = get_post_meta($post->ID, "ask_us_override", 1);
 		$askUrl = "";
@@ -108,8 +99,18 @@
 			?>
 			
 		</header>
-		
+
 		<?php 
-			$pageRoot = getRoot($post);
-			$section = get_post($pageRoot);
+			// Temporary maintenance page for site under development.
+			// Change $blog_id to match.
+			if (!is_user_logged_in() && $blog_id == 99) {
+				get_template_part('inc/maintenance');
+				get_footer();
+				exit;
+			}
+
+			else {
+				$pageRoot = getRoot($post);
+				$section = get_post($pageRoot);
+			}
 		?>
